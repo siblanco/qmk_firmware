@@ -26,7 +26,13 @@ The Miryoku QMK development branch is named ~miryoku~ and is at https://github.c
 
 New commits can be seen at the top of the [[https://github.com/manna-harbour/miryoku_qmk/commits/miryoku][history]] with commit messages beginning ~[miryoku]~ or ~[miryoku-github]~
 
-Periodically, the ~[miryoku]~ commits are squashed and merged upstream into QMK master by pull request, the ~miryoku~ branch is renamed, and a new ~miryoku~ branch is created from QMK master.
+To checkout the ~miryoku~ branch in your existing QMK build environment:
+#+BEGIN_SRC sh :tangle no
+git remote add miryoku_qmk git@github.com:manna-harbour/miryoku_qmk.git # if using SSH
+git remote add miryoku_qmk https://github.com/manna-harbour/miryoku_qmk.git # if using HTTPS
+git fetch miryoku_qmk
+git checkout --track miryoku_qmk/miryoku
+#+END_SRC
 
 
 **** Merge
@@ -735,6 +741,19 @@ make torn:manna-harbour_miryoku:flash
 
 ** Additional and Experimental Features
 
+*** Bilateral Combinations
+
+- [[https://github.com/manna-harbour/qmk_firmware/issues/29][Bilateral Combinations]]
+
+
+*** Caps Word
+
+[[https://github.com/qmk/qmk_firmware/blob/master/docs/feature_caps_word.md][Caps Word]] is used in place of ~Caps Lock~.  Combine with ~Shift~ for ~Caps Lock~.
+
+*** Retro Shift
+
+- [[https://github.com/manna-harbour/qmk_firmware/issues/33][Retro Shift]]
+
 
 *** Thumb Combos
 
@@ -743,14 +762,16 @@ make torn:manna-harbour_miryoku:flash
 Combo the primary and secondary thumb keys to emulate the tertiary thumb key.  Can be used on keyboards with missing or hard to reach tertiary thumb keys or for compatibility with same.  Requires suitable keycaps to enable the thumb to press both keys simultaneously.
 
 
-*** Bilateral Combinations
 
-- [[https://github.com/manna-harbour/qmk_firmware/issues/29][Bilateral Combinations]]
+*** 𝑥MK
 
+Use Miryoku QMK with any keyboard with [[https://github.com/manna-harbour/xmk][𝑥MK]].
 
-*** Retro Shift
+For [[#local-builds][local builds]], merge https://github.com/manna-harbour/qmk_firmware/tree/xmk and build for keyboard ~converter/xmk~.
 
-- [[https://github.com/manna-harbour/qmk_firmware/issues/33][Retro Shift]]
+For [[#workflow-builds][workflow builds]], use the Build Inputs workflow and build with keyboard ~converter/xmk~ and merge ~manna-harbour/qmk_firmware/xmk~, or use the Build Example 𝑥MK workflow.
+
+Also see [[https://github.com/manna-harbour/miryoku_kmonad][Miryoku KMonad]].
 
 
 *** 𝑥MK
