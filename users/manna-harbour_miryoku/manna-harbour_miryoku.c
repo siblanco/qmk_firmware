@@ -7,17 +7,14 @@
 
 #include "manna-harbour_miryoku.h"
 
-enum layers { MIRYOKU_LAYER_NAMES };
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [BASE]   = U_MACRO_VA_ARGS(LAYOUT_miryoku, MIRYOKU_LAYER_BASE),
-  [NAV]    = U_MACRO_VA_ARGS(LAYOUT_miryoku, MIRYOKU_LAYER_NAV),
-  [MOUSE]  = U_MACRO_VA_ARGS(LAYOUT_miryoku, MIRYOKU_LAYER_MOUSE),
-  [MEDIA]  = U_MACRO_VA_ARGS(LAYOUT_miryoku, MIRYOKU_LAYER_MEDIA),
-  [NUM]    = U_MACRO_VA_ARGS(LAYOUT_miryoku, MIRYOKU_LAYER_NUM),
-  [SYM]    = U_MACRO_VA_ARGS(LAYOUT_miryoku, MIRYOKU_LAYER_SYM),
-  [FUN]    = U_MACRO_VA_ARGS(LAYOUT_miryoku, MIRYOKU_LAYER_FUN),
-  [BUTTON] = U_MACRO_VA_ARGS(LAYOUT_miryoku, MIRYOKU_LAYER_BUTTON)
+// Additional Features double tap guard
+
+enum {
+    U_TD_BOOT,
+#define MIRYOKU_X(LAYER, STRING) U_TD_U_##LAYER,
+MIRYOKU_LAYER_LIST
+#undef MIRYOKU_X
 };
 
 void u_td_fn_boot(qk_tap_dance_state_t *state, void *user_data) { \
@@ -77,7 +74,6 @@ const uint16_t PROGMEM thumbcombos_sym[] = {KC_UNDS, KC_LPRN, COMBO_END};
 const uint16_t PROGMEM thumbcombos_sym[] = {KC_RPRN, KC_UNDS, COMBO_END};
   #endif
 const uint16_t PROGMEM thumbcombos_fun[] = {KC_SPC, KC_TAB, COMBO_END};
-
 combo_t key_combos[COMBO_COUNT] = {
   COMBO(thumbcombos_base_right, LT(U_FUN, KC_DEL)),
   COMBO(thumbcombos_base_left, LT(U_MEDIA, KC_ESC)),
